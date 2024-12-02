@@ -7,12 +7,12 @@
 | -------------------------- | ---------------- | ----------------- | -------------------------------------------------------------------------------------------------- |
 | Titolo                     | string           | varchar           | testo                                                                                              |
 | Autore                     | string           | varchar           | testo                                                                                              |
-| Categoria                  | string           | varchar           | testo                                                                                              |
+| Categoria                  | byte             | tinyint           | testo                                                                                              |
 | Anno di pubblicazione==*== | ~~string~~ short | ~~date~~ smallint | per essere in grado poi di classificarli in ordine di uscita                                       |
 | Casa Editrice              | string           | varchar           | testo                                                                                              |
 | ISBN                       | string           | varchar           | non serve un dato numerico perché l'ISBN è di identificazione e non serve calcolare niente         |
 | Scaffale                   | string           | varchar           | se la biblioteca tiene conto di dove è conservato un libro, potrebbe usare un sistema alfanumerico |
-| Disponibilità              | boolean          | boolean           | è disponibile, o no?                                                                               |
+| Disponibilità              | boolean          | bit               | è disponibile, sì o no?                                                                            |
 | Descrizione                | string           | text              | in text ci stanno più caratteri                                                                    |
 ==`*`==anno di pubblicazione - l'anno non è una data, ma un numero intero 
 ### Membro
@@ -45,33 +45,44 @@
 
 ### Piatto
 
-| Caratteristiche               | dato java | dato db | spiegazione                                                                                           |
-| ----------------------------- | --------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| Nome                          | string    | varchar | testo                                                                                                 |
-| Ingredienti                   | string    | varchar | testo                                                                                                 |
-| Categoria (primo, dolce, ecc) | string    | varchar | testo                                                                                                 |
-| Descrizione                   | string    | varchar | testo                                                                                                 |
-| Prezzo                        | double    | decimal | un numero a virgola mobile che è un prezzo, massimo 2 cifre dopo la virgola, e un calcolo finanziario |
+| Caratteristiche               | dato java       | dato db             | spiegazione                                                                                            |
+| ----------------------------- | --------------- | ------------------- | ------------------------------------------------------------------------------------------------------ |
+| Nome                          | string          | varchar             | testo                                                                                                  |
+| Ingredienti                   | string          | varchar             | testo                                                                                                  |
+| Categoria (primo, dolce, ecc) | ~~string~~ byte | ~~varchar~~ tinyint | utilizzare una strategia numerica così è più facile da gestire. traduzioni varie gestite in front end. |
+| Descrizione                   | string          | text                | testo                                                                                                  |
+| Disponibilità                 | boolean         | bit                 |                                                                                                        |
+| Foto                          | string          | text                | rimanda al nome dell'immagine                                                                          |
+| Variazioni                    | string          | text                | testo                                                                                                  |
+| Allergeni                     | string          | varchar             | testo                                                                                                  |
+| Calorie                       | short           | smallint            |                                                                                                        |
+| Prezzo                        | double          | decimal             | un numero a virgola mobile che è un prezzo, massimo 2 cifre dopo la virgola, e un calcolo finanziario  |
 
 ### Ingrediente
 
-| Caratteristiche               | dato java | dato db | spiegazione                                                                                           |
-| ----------------------------- | --------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| Nome                          | string    | varchar | testo                                                                                                 |
-| Tipo (pasta, proteine, ecc)   | string    | varchar | testo                                                                                                 |
-| Fornitore                     | string    | varchar | testo                                                                                                 |
-| Data di acquisto/preparazione | localdate | date    | data                                                                                                  |
-| Data di scadenza              | localdate | date    | data                                                                                                  |
-| Costo                         | float     | decimal | un numero a virgola mobile che è un prezzo, massimo 2 cifre dopo la virgola, e un calcolo finanziario |
+| Caratteristiche                  | dato java | dato db | spiegazione                                                                                            |
+| -------------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------------------ |
+| Nome                             | string    | varchar | testo                                                                                                  |
+| Descrizione                      | string    | text    | testo                                                                                                  |
+| Foto                             | string    | varchar |                                                                                                        |
+| Tipologia (pasta, proteine, ecc) | byte      | tinyint | utilizzare una strategia numerica così è più facile da gestire. traduzioni varie gestite in front end. |
+| Fornitore                        | string    | varchar | testo                                                                                                  |
+| Disponibilità                    | boolean   | bit     |                                                                                                        |
+| Modalità di conservazione        | string    | varchar |                                                                                                        |
+| Costo                            | float     | decimal | un numero a virgola mobile che è un prezzo, massimo 2 cifre dopo la virgola, e un calcolo finanziario  |
 ### Clienti
 
-| Caratteristiche    | dato java | dato db | spiegazione               |
-| ------------------ | --------- | ------- | ------------------------- |
-| Nome               | string    | varchar | testo                     |
-| Cognome            | string    | varchar | testo                     |
-| Tessera fedeltà    | string    | varchar | numero di identificazione |
-| Data di nascita    | localDate | date    | data                      |
-| Numero di telefono | string    | varchar | numero di tel             |
+| Caratteristiche    | dato java     | dato db  | spiegazione   |
+| ------------------ | ------------- | -------- | ------------- |
+| Nome               | string        | varchar  | testo         |
+| Cognome            | string        | varchar  | testo         |
+| Numero di telefono | string        | varchar  | numero di tel |
+| Data di nascita    | localdate     | date     |               |
+| data iscrizione    | localDateTime | datetime |               |
+| email              | string        | varchar  |               |
+| username           | string        | varchar  |               |
+| password           | string        | varchar  |               |
+| note               | string        | text     |               |
 
 
 ## Negozio di fiori
